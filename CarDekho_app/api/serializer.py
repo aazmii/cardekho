@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from ..models import CarList
+from decimal import Decimal
 
 def alphanumeric (value):
     if not str(value).isalnum: 
@@ -30,7 +31,7 @@ class CarSerializer (serializers.ModelSerializer):
     def get_descounted_price(self, obj):
         if obj.price is None: 
             return None
-        return obj.price -3000
+        return obj.price * Decimal (0.9)
     class Meta: 
         model = CarList
         fields = "__all__"
