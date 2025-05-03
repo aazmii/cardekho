@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms import ValidationError
+from .showroom import ShowroomList
 
 def alphanumeric (value): 
     if not str(value).isalnum():
@@ -12,6 +13,7 @@ class CarList(models.Model):
     active = models.BooleanField(default=False)
     chassis_number  = models.CharField(max_length = 100, blank = True, null = True, validators=[alphanumeric])
     price = models.DecimalField(max_digits = 9, decimal_places=2, blank= True, null = True)    
+    shworoom = models.ForeignKey(ShowroomList, on_delete = models.CASCADE, related_name = 'Showrooms', null = True)
 
     def __str__(self):
         return self.car_name
